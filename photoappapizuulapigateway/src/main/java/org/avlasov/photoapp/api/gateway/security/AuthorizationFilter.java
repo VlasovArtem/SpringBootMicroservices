@@ -39,7 +39,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(String header) {
-        String token = header.replace(environment.getProperty("authorization.token.header.name.prefix"), "");
+        String token = header.replace(environment.getProperty("authorization.token.header.name.prefix"), "").trim();
         String userId = Jwts.parser()
                 .setSigningKey(environment.getProperty("token.secret"))
                 .parseClaimsJws(token)

@@ -1,0 +1,25 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/VlasovArtem/SpringBootConfiguration
+          clone-on-start: true
+#          password:
+#          username:
+  application:
+    name: PhotoAppAPIConfigServer
+server:
+  port: 8012
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
