@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+	id 'org.springframework.boot' version '2.1.7.RELEASE'
+}
+
+repositories {
+	mavenCentral()
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+
+group = 'org.avlasov.photoapp.discovery'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+ext {
+	set('springCloudVersion', "Greenwich.SR2")
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+dependencies {
+	implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+	implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation('junit:junit:4.12')
+	compileOnly('org.projectlombok:lombok')
+	annotationProcessor('org.projectlombok:lombok')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
