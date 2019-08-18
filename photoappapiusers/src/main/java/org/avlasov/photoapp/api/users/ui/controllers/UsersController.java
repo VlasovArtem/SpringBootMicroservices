@@ -4,12 +4,14 @@ import org.avlasov.photoapp.api.users.service.UsersService;
 import org.avlasov.photoapp.api.users.shared.UserDto;
 import org.avlasov.photoapp.api.users.ui.model.CreateUserRequestModel;
 import org.avlasov.photoapp.api.users.ui.model.CreateUserResponseModel;
+import org.avlasov.photoapp.api.users.ui.model.UserResponseModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +49,16 @@ public class UsersController {
         CreateUserResponseModel userResponseModel = modelMapper.map(createdUser, CreateUserResponseModel.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseModel);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserResponseModel> getUser(@PathVariable("userId") String userId) {
+
+        UserDto userDto = usersService.getUserByUserId(userId);
+
+        UserResponseModel responseModel = modelMapper.map(userDto, UserResponseModel.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseModel);
     }
 
 }

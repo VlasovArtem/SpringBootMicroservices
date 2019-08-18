@@ -1,2 +1,2 @@
 rootProject.name = 'spring-boot-microservices'
-include('photoappdiscoveryservice', 'photoappapiusers', 'photoappapiaccountmanagement')
+include('photoappdiscoveryservice', 'photoappapiusers', 'photoappapiaccountmanagement', 'photoappapiconfigserver', 'photoappapizuulapigateway', 'photoappapialbums')

@@ -1,0 +1,10 @@
+gateway: 
+  ip: avlasov-mac
+
+token: 
+  expiration_time: 86400000
+  secret: '{cipher}AQAKfHe0NNXv9E7WAQsQZB46sxeXk8hzoNPNd0W8CJ38DsaPP9OeON/aSpjwwzBoqPbZRDv1UntCTlBovqbfnDynR4vvE+aFy7GSCpSF9TTWFcVlly5DZ8evMkAZ0JUDq6eGufFJcfoSWthHCFv1T8gM3uR5zQVdGMmn5dfNqe0zSOPm/2xDAt9VODhbYjVU8ULbbOn2R3psK5XLG95S4M+idLR1lKm2zrGCgE2V0YQ5MiEAhn25lRUcngTKyNWA15+aCX5wC08cAGFNtey5ZXP4G779+VUxXJlmv49mwwkIRFxlLIIO1UCUye7w0Qj7fNp0B8HMoC5NG5Wr48hR664LP9Go0ETSdn2/2RILL361iXmG8fGmcdkZFtlNrFmAYjU='
+
+api:
+  url:
+    albums: http://albums-ws/api/users/%s/albums

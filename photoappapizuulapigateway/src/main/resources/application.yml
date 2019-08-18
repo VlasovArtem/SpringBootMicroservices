@@ -14,3 +14,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8010/eureka
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans,health,routes,httptrace
