@@ -1,4 +1,4 @@
-## Users Service
+# Users Service
 
 You can start service with unique ID and pirt, for Eureka and Zuul Gateway
 Using IDEA `spring.application.instance_id=artem;server.port=55555` add this line in environment properties, or with command line `-Dspring-boot.run.arguments=--spring.application.instance_id=artem,server.port=55555`
@@ -20,3 +20,5 @@ GRANT ALL privileges on photo_app.* to 'user'@'localhost';
 ALTER USER 'user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'user';
 ```
 
+## Services
+This Service work and connect to the next services Eureka, Feign Client, Hystrix, Actuator, and Config Server 

@@ -8,3 +8,5 @@ token:
 api:
   url:
     albums: http://albums-ws/api/users/%s/albums
+  exception:
+    albums-not-found: 'Users albums are not found'

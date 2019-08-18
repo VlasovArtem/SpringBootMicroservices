@@ -1,0 +1,16 @@
+api:
+  url:
+    path:
+      login: /users-ws/api/users/login
+      registration: /users-ws/api/users
+      h2console: /users-ws/h2-console
+      zuul:
+        actuator: /actuator/*
+      users:
+        actuator: /users-ws/actuator/*
+
+authorization:
+  token:
+    header:
+      name: Authorization
+      name.prefix: Bearer

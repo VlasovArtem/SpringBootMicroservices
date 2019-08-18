@@ -1,14 +1,11 @@
 package org.avlasov.photoapp.api.users.service;
 
+import org.avlasov.photoapp.api.users.data.AlbumsServiceClient;
 import org.avlasov.photoapp.api.users.data.UserEntity;
 import org.avlasov.photoapp.api.users.data.UsersRepository;
 import org.avlasov.photoapp.api.users.shared.UserDto;
-import org.avlasov.photoapp.api.users.ui.model.AlbumResponseModel;
 import org.modelmapper.ModelMapper;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,15 +22,18 @@ public class UsersServiceImpl implements UsersService {
     private final ModelMapper modelMapper;
     private final UsersRepository usersRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final AlbumsServiceClient albumsServiceClient;
     private final RestTemplate restTemplate;
     private final Environment env;
 
     public UsersServiceImpl(ModelMapper modelMapper, UsersRepository usersRepository,
-                            BCryptPasswordEncoder passwordEncoder, RestTemplate restTemplate,
-                            Environment env) {
+                            BCryptPasswordEncoder passwordEncoder,
+                            AlbumsServiceClient albumsServiceClient,
+                            RestTemplate restTemplate, Environment env) {
         this.modelMapper = modelMapper;
         this.usersRepository = usersRepository;
         this.passwordEncoder = passwordEncoder;
+        this.albumsServiceClient = albumsServiceClient;
         this.restTemplate = restTemplate;
         this.env = env;
     }
@@ -67,12 +66,12 @@ public class UsersServiceImpl implements UsersService {
 
         UserDto userDto = modelMapper.map(userEntity, UserDto.class);
 
-        String albumsUrl = String.format(env.getProperty("api.url.albums"), userId);
+//        String albumsUrl = String.format(env.getProperty("api.url.albums"), userId);
+//
+//        ResponseEntity<List<AlbumResponseModel>> exchange = restTemplate.exchange(albumsUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {
+//        });
 
-        ResponseEntity<List<AlbumResponseModel>> exchange = restTemplate.exchange(albumsUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {
-        });
-
-        userDto.setAlbums(exchange.getBody());
+        userDto.setAlbums(albumsServiceClient.getAlbums(userId));
 
         return userDto;
     }

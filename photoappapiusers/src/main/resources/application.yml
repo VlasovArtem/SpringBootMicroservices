@@ -32,3 +32,11 @@ management:
     web:
       exposure:
         include: mappings
+
+logging:
+  level:
+    org.avlasov.photoapp.api.users.data.AlbumsServiceClient: DEBUG
+
+feign:
+  hystrix:
+    enabled: true
