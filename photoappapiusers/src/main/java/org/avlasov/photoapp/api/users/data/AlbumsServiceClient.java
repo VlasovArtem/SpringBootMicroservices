@@ -12,6 +12,6 @@ import java.util.List;
 public interface AlbumsServiceClient {
 
     @GetMapping("/api/users/{userId}/albums")
-    List<AlbumResponseModel> getAlbums(@PathVariable String userId);
+    List<AlbumResponseModel> getAlbums(@PathVariable("userId") String userId);
 
 }
