@@ -42,6 +42,7 @@ management:
 logging:
   level:
     org.avlasov.photoapp.api.users.data.AlbumsServiceClient: DEBUG
+  file: users-ws.log
 
 feign:
   hystrix:

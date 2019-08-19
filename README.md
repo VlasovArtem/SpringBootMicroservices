@@ -36,50 +36,6 @@ Service name **photoappapiaccountmanagement**
 
 Service name **photoappapialbums**
 
-## How to run
-
-You need to follow the next steps:
-
-
-1. Run RabbitMQ server
-2. Start Zipkin server (optional)
-3. run Spring Clound Configuration Service
-4. run Eureka Discover Service
-5. run Zuul Gateway Service
-6. run other services
-
-## How to use
-
-1. Check if services are registered in Eureka Discovery Service (http://localhost:8010/). Please note, Spring Cloud Configuration service will not be present in EDS
-
-### Users API
-
-#### Register new user
-
-POST http://localhost:8011/users-ws/api/users
-
-```json
-{
-	"firstName": "name",
-	"lastName": "name",
-	"password": "password",
-	"email": "test3@mail.com"
-}
-```
-
-#### Login
-
-POST http://localhost:8011/users-ws/api/users/login
-
-```json
-{
-	"password": "password",
-	"email": "test3@mail.com"
-}
-```
-
-After successful login find **token** header and use this token as Basic authorization for next operations `Baere <token>`
-
 ## Communication
 
 ### Types
@@ -137,3 +93,118 @@ Keytool is provided by JDK
 Encrypt all required data
 
 1. Use next properties style to store encrypted data **{cipher}encrypted_value** (do not forget to surround data with single quote if you are using yaml **'{cipher}encrypted_value'**)
+
+## ELK (Elasticsearch, Logstash, Kibana)
+
+https://www.elastic.co/
+
+1. Install and configure Logstash
+2. Install Elasticsearch
+3. Install Cabana
+
+### How to start
+
+1. Start Elasticsearch
+2. Start Logstash with provided configuration `logstash -f logstash.conf`
+3. Start Kibana
+
+### Elasticsearch
+
+To get possible http commands you can use next url http://localhost:9200/_cat
+
+Example for search by microservice http://localhost:9200/users-ws-2019.08.19/_search?q=*
+
+Example for search by microservice and field that is contains value http://localhost:9200/users-ws-2019.08.19/_search?q=message:Eureka
+
+### Kibana
+
+This service is starts under the port 5601 - http://localhost:5601
+
+To update configuration just update kibana.yml
+
+Go to Kibana -> Management  -> Index Patterns and create indexes for out microservice, for example **albums-ws-\***
+
+On Discover page you can search by created Indexes
+
+### Logstash
+
+#### Configuration
+
+Logstash file configuration example
+
+```
+input {
+  file {
+    type => "users-ws-log"
+    path => "<path_to>/spring-boot-microservices/photoappapiusers/users-ws.log"
+  }
+  file {
+    type => "albums-ws-log"
+    path => "<path_to>/spring-boot-microservices/photoappapialbums/albums-ws.log"
+  }
+}
+
+output {
+  if [type] == "users-ws-log" {
+    elasticsearch {
+      hosts => ["http://localhost:9200"]
+      index => "users-ws-%{+YYYY.MM.dd}"
+      #user => "elastic"
+      #password => "changeme"
+    }
+  } else if [type] == "albums-ws-log" {
+    elasticsearch {
+      hosts => ["http://localhost:9200"]
+      index => "albums-ws-%{+YYYY.MM.dd}"
+      #user => "elastic"
+      #password => "changeme"
+    }
+  }
+  stdout { codec => rubydebug }
+}
+```
+
+
+
+## How to run
+
+You need to follow the next steps:
+
+1. Run RabbitMQ server
+2. Start Zipkin server (optional)
+3. run Spring Clound Configuration Service
+4. run Eureka Discover Service
+5. run Zuul Gateway Service
+6. run other services
+
+## How to use
+
+1. Check if services are registered in Eureka Discovery Service (http://localhost:8010/). Please note, Spring Cloud Configuration service will not be present in EDS
+
+### Users API
+
+#### Register new user
+
+POST http://localhost:8011/users-ws/api/users
+
+```json
+{
+	"firstName": "name",
+	"lastName": "name",
+	"password": "password",
+	"email": "test3@mail.com"
+}
+```
+
+#### Login
+
+POST http://localhost:8011/users-ws/api/users/login
+
+```json
+{
+	"password": "password",
+	"email": "test3@mail.com"
+}
+```
+
+After successful login find **token** header and use this token as Basic authorization for next operations `Baere <token>`

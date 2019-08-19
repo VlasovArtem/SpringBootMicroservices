@@ -22,3 +22,5 @@ management:
     web:
       exposure:
         include: mappings
+logging:
+  file: albums-ws.log
