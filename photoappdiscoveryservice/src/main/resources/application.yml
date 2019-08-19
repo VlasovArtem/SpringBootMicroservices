@@ -1,6 +1,8 @@
 server:
   port: 8010
-spring.application.name: discoveryservice
+
+spring:
+  application.name: discoveryservice
 
 eureka:
   client:

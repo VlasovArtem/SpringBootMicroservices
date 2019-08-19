@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "df3672b8-6630-4f8b-ae62-b6c4afc18385",
+		"name": "Spring Boot Microservices",
+		"description": "Examples for Spring Boot Microservices project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create new user",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"first\",\n\t\"lastName\": \"last\",\n\t\"password\": \"password\",\n\t\"email\": \"test3@mail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8011/users-ws/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8011",
+					"path": [
+						"users-ws",
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"password\": \"password\",\n\t\"email\": \"test3@mail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8011/users-ws/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8011",
+					"path": [
+						"users-ws",
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users Service status check",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1MTI2NTBkOS03Y2UyLTRjZWEtYjkxYy0yYjkyMTZmZjUxYmEiLCJleHAiOjE1NjYwNDk0MzJ9.yEn9SxyjQUYfBc0ySPefQZqKk47GKBgmqWcd79ASxDXIw48IdI0XlpWXG1trn_l1TGpdXOaTZCSzAYBI8KsZAQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8011/users-ws/api/users/status/check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8011",
+					"path": [
+						"users-ws",
+						"api",
+						"users",
+						"status",
+						"check"
+					]
+				},
+				"description": "Login required"
+			},
+			"response": []
+		},
+		{
+			"name": "Discovery Service Actuator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8011/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8011",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring Config Service Example",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8012/zuul/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8012",
+					"path": [
+						"zuul",
+						"default"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring Config Service encrypt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "test"
+				},
+				"url": {
+					"raw": "http://localhost:8012/encrypt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8012",
+					"path": [
+						"encrypt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring config service decrypt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "AQB+Spw7Fp4ngnOJbqhGarHiYFHpmyj0CFGvmOJsc+Fkz+8cb0Akmn7A7IbXx4xIJfypYLH/D9nSVuPWAQPSAvNKFYuONllap6P6SWMKhTeoa7TCMXYf4bvE8D7MAPvKD+qm1M16vzaUb84Is2TqoqXbriIvzMR21md3cE5yYxqhbqADAxjKV7+WorTTpNOsrY7AhW1DHWzoM9dwheY8/UOiPw1jqUCMahLTmtAtQwH7VBNUuRYiMC2Cch1igrcxDm6BQzx59ilrZ/M3v1WuAaF52+O+HPxIKsT077JHp1BJqijb/7Cd7PvGdhu5PIfh3sWq9M4dUMBT1iHR24MkHW80aOSfeWCubQv+4DGfLuxLrn/EVhaHxD4+TixnGSe5saU="
+				},
+				"url": {
+					"raw": "http://localhost:8012/decrypt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8012",
+					"path": [
+						"decrypt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYjIwZGI2OS0xZTI2LTQwNTItODY5OC0wM2EwZjIxMzliMTIiLCJleHAiOjE1NjYzMDEwNjV9.ruXiFjTDdBALhSa5dCslVu-V6RC7knJR1VVQLcyHOMbSToDS_h-fwPQEgRnH7iTA9HMFzkFsNN2T8XOJRJzgAw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8011/users-ws/api/users/bb20db69-1e26-4052-8698-03a0f2139b12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8011",
+					"path": [
+						"users-ws",
+						"api",
+						"users",
+						"bb20db69-1e26-4052-8698-03a0f2139b12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spring Config Service update properties",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8012/actuator/bus-refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8012",
+					"path": [
+						"actuator",
+						"bus-refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Albums",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYjIwZGI2OS0xZTI2LTQwNTItODY5OC0wM2EwZjIxMzliMTIiLCJleHAiOjE1NjYxOTQ4Mjd9.mZ7digaC9jYFIUmTRHmFzkgR5wCbBiag0SOfH0Rt3p0R9U-BsXowoULoDvmOyETWujibQlIlqHhfwHfkw2MhiA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8011/albums-ws/api/users/bb20db69-1e26-4052-8698-03a0f2139b12/albums",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8011",
+					"path": [
+						"albums-ws",
+						"api",
+						"users",
+						"bb20db69-1e26-4052-8698-03a0f2139b12",
+						"albums"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
