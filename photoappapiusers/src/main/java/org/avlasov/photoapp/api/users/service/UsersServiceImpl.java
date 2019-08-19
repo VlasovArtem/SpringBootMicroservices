@@ -1,5 +1,6 @@
 package org.avlasov.photoapp.api.users.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.avlasov.photoapp.api.users.data.AlbumsServiceClient;
 import org.avlasov.photoapp.api.users.data.UserEntity;
 import org.avlasov.photoapp.api.users.data.UsersRepository;
@@ -17,6 +18,7 @@ import java.util.Collections;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class UsersServiceImpl implements UsersService {
 
     private final ModelMapper modelMapper;
@@ -71,7 +73,11 @@ public class UsersServiceImpl implements UsersService {
 //        ResponseEntity<List<AlbumResponseModel>> exchange = restTemplate.exchange(albumsUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<AlbumResponseModel>>() {
 //        });
 
+        log.info("Before calling albums Microservice");
+
         userDto.setAlbums(albumsServiceClient.getAlbums(userId));
+
+        log.info("After calling albums Microservice");
 
         return userDto;
     }

@@ -21,4 +21,18 @@ ALTER USER 'user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'user';
 ```
 
 ## Services
-This Service work and connect to the next services Eureka, Feign Client, Hystrix, Actuator, and Config Server 
+This Service work and connect to the next services Eureka, Feign Client, Hystrix, Actuator,  Config Server, Spring Cloud Sleuth, and Zipkin
+
+## Sleuth and Zipkin
+
+Sleuth log info `[users-ws,90b2180464d31e17,90b2180464d31e17,true]`, where:
+1. Application name
+2. Trace ID - is not changing during transaction 
+3. Span ID - is changes from microservice to microservice.
+4. true - should be send to Zipkin
+  
+
+To enable Zipkin follow next website and start zipkin server https://zipkin.io/pages/quickstart.html
+
+Zipkin start url - http://localhost:9411
+
