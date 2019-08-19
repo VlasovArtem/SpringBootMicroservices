@@ -42,10 +42,11 @@ You need to follow the next steps:
 
 
 1. Run RabbitMQ server
-2. run Spring Clound Configuration Service
-3. run Eureka Discover Service
-4. run Zuul Gateway Service
-5. run other services
+2. Start Zipkin server (optional)
+3. run Spring Clound Configuration Service
+4. run Eureka Discover Service
+5. run Zuul Gateway Service
+6. run other services
 
 ## How to use
 
