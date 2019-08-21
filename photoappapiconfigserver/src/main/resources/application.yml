@@ -3,7 +3,7 @@ spring:
     active: native
   #    active: native,git
   rabbitmq:
-    host: localhost
+    host: ${myRabbitMQ.name:localhost}
     port: 5672
     username: guest
     password: guest
@@ -27,4 +27,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: bus-refresh
+        include: bus-refresh,env,configprops

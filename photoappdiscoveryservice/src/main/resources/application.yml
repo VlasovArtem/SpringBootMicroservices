@@ -8,5 +8,8 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
-    service-url:
-      defaultZone: http://localhost:8010/eureka
+  server:
+    peer-node-read-timeout-ms: 30000
+
+logging:
+  file: discovery-ws.log

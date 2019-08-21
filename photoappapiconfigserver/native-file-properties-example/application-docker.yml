@@ -1,0 +1,11 @@
+myRabbitMQ:
+  name: rabbitmq
+
+myGateway:
+  name: zuul-api-gateway
+
+myEureka:
+  host-name: discovery-service
+
+myMySQL:
+  name: mysql

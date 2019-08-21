@@ -1,0 +1,120 @@
+version: '2'
+
+services:
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    volumes:
+      - rabbitmq-data
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql-data
+  spring-config-service:
+    image: spring-config-service
+    container_name: spring-config-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: photoappapiconfigserver/build/libs/photoappapiconfigserver-0.0.1-SNAPSHOT.jar
+        WAIT_FOR_APP: rabbitmq:5672
+    volumes:
+      - ./photoappapiconfigserver/native-file-properties-example:/native-file-properties-example
+    depends_on:
+      - rabbitmq
+    environment:
+      spring.profiles.active: native,docker
+      myRabbitMQ.name: rabbitmq
+  discovery-service:
+    image: discovery-service
+    container_name: discovery-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: photoappdiscoveryservice/build/libs/photoappdiscoveryservice-0.0.1-SNAPSHOT.jar
+        WAIT_FOR_APP: spring-config-service:8012
+    ports:
+      - '8010:8010'
+    depends_on:
+      - rabbitmq
+      - spring-config-service
+    environment:
+      myConfigServer.name: spring-config-service
+  zuul-api-gateway:
+    image: zuul-api-gateway
+    container_name: zuul-api-gateway
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: photoappapizuulapigateway/build/libs/photoappapizuulapigateway-0.0.1-SNAPSHOT.jar
+        WAIT_FOR_APP: discovery-service:8010
+    ports:
+      - '8011:8011'
+    depends_on:
+      - rabbitmq
+      - spring-config-service
+      - discovery-service
+    environment:
+      myConfigServer.name: spring-config-service
+  users-service:
+    image: users-service
+    container_name: users-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: photoappapiusers/build/libs/photoappapiusers-0.0.1-SNAPSHOT.jar
+        WAIT_FOR_APP: zuul-api-gateway:8011
+    depends_on:
+      - rabbitmq
+      - mysql
+      - spring-config-service
+      - discovery-service
+      - zuul-api-gateway
+    environment:
+      myConfigServer.name: spring-config-service
+  albums-service:
+    image: albums-service
+    container_name: albums-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: photoappapialbums/build/libs/photoappapialbums-0.0.1-SNAPSHOT.jar
+        WAIT_FOR_APP: zuul-api-gateway:8011
+    depends_on:
+      - rabbitmq
+      - mysql
+      - spring-config-service
+      - discovery-service
+      - zuul-api-gateway
+    environment:
+      myConfigServer.name: spring-config-service
+  account-management-service:
+    image: account-management-service
+    container_name: account-management-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: photoappapiaccountmanagement/build/libs/photoappapiaccountmanagement-0.0.1-SNAPSHOT.jar
+        WAIT_FOR_APP: zuul-api-gateway:8011
+    depends_on:
+      - rabbitmq
+      - mysql
+      - spring-config-service
+      - discovery-service
+      - zuul-api-gateway
+    environment:
+      myConfigServer.name: spring-config-service
+
+volumes:
+  rabbitmq-data:
+  mysql-data:
+

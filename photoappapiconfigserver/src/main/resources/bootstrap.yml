@@ -5,3 +5,8 @@ encrypt:
     password: 1q2w3e4r
     alias: apiEncryptionKey
 #    location: file://${user.home}/path
+
+spring:
+  profiles:
+    active: native
+

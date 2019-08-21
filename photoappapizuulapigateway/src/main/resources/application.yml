@@ -10,8 +10,18 @@ spring:
   application:
     name: zuul
 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
 management:
   endpoints:
     web:
       exposure:
         include: beans,health,routes,httptrace
+
+logging:
+  file: zuul-ws.log

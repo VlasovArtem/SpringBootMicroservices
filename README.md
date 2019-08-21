@@ -164,8 +164,6 @@ output {
 }
 ```
 
-
-
 ## How to run
 
 You need to follow the next steps:
@@ -176,6 +174,9 @@ You need to follow the next steps:
 4. run Eureka Discover Service
 5. run Zuul Gateway Service
 6. run other services
+
+OR use Docker
+1. `docker-compose run` do not forget to add additional memory for docker application (at least 4GB)
 
 ## How to use
 

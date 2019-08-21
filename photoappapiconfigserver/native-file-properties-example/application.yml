@@ -1,5 +1,5 @@
 gateway: 
-  ip: avlasov-mac
+  ip: ${myGateway.name:localhost}
 
 token: 
   expiration_time: 86400000
@@ -14,8 +14,15 @@ api:
 eureka:
   client:
     service-url:
-      defaultZone: http://${myEureka.name}:${myEureka.password}@localhost:8010/eureka
+      defaultZone: http://${myEureka.name}:${myEureka.password}@${myEureka.host-name:localhost}:8010/eureka
 
 myEureka:
   password: '{cipher}AQApEixf4/q++KxfhVdHg33LoIK9PW0AGDHh8BaCI/rUIc+Ae0ZrP9VMsb4sxuYesOUI1tn9iHzTk1mXPFGC6EFUyeozX09pZXEwEItWQvFXTyeNvAn6H6ciQukJiU3ayzGX+fm9N5RFbGELOVnetbBFygLTsxN4KjcvyGr6AtB5dtZ3LcwIBPWMNXhTkaPCqh59lhPTfqkLhUL8P7e/p4UrQqXyHUOx+qt3kXwMymSKgTBgn3Bbqf/T8vTi0LRWxysTqC/tsFNYkydYsLNd/MtRBN9Y8LiXPPq/XoDOIlC9BzkiUDOwoErnqb2EU7GongukYPs/gxy+EK0pmRGAKeSvO3PELsY67AQcK18E+qv0fcpv0hOe+NuZ+L9ZY1igaGc='
   name: '{cipher}AQApEixf4/q++KxfhVdHg33LoIK9PW0AGDHh8BaCI/rUIc+Ae0ZrP9VMsb4sxuYesOUI1tn9iHzTk1mXPFGC6EFUyeozX09pZXEwEItWQvFXTyeNvAn6H6ciQukJiU3ayzGX+fm9N5RFbGELOVnetbBFygLTsxN4KjcvyGr6AtB5dtZ3LcwIBPWMNXhTkaPCqh59lhPTfqkLhUL8P7e/p4UrQqXyHUOx+qt3kXwMymSKgTBgn3Bbqf/T8vTi0LRWxysTqC/tsFNYkydYsLNd/MtRBN9Y8LiXPPq/XoDOIlC9BzkiUDOwoErnqb2EU7GongukYPs/gxy+EK0pmRGAKeSvO3PELsY67AQcK18E+qv0fcpv0hOe+NuZ+L9ZY1igaGc='
+
+spring:
+  rabbitmq:
+    host: ${myRabbitMQ.name:localhost}
+    port: 5672
+    username: guest
+    password: guest

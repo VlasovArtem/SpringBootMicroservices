@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/photo_app?serverTimezone=UTC
+    url: jdbc:mysql://${myMySQL.name:localhost}:3306/photo_app?serverTimezone=UTC
     username: user
     password: '{cipher}AQAjnb8uP3mfw6PYez1H/sr3Ue1yvchH3RrsNUoF3Tqe4lCz4aFxiqKxFL7X3wOXl43FgkqAeURL10sL7JottcqjzMtXIgPSs745mtCJeU/NhjnukH/gylFTSYwNcOg+J0c1t9NyNoEkJ8kiJb5Af0D/1LbrVnUrEwpFHxxXMUyJZReXaKCavP/0KAc2v9XmpecT4i2eDZYYWC1D7WQOJM3p8z1J4NjHbZTj+TcQPby0x8/kK/6qawnwiyIgAJZ20rMVkuUYEUTP747gK+XYvhKgXYi/gjWXuQi+9brJQD8xfOOJ65OjACoL6BujFgaxB//RtKNJAxejbQAV+WGm70Sh92Ek92vOAPfnwN5A4KifqMGKB+j0dpS+9V3hTMoqtUo='
   jpa:
