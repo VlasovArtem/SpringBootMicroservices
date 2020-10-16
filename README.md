@@ -170,7 +170,7 @@ You need to follow the next steps:
 
 1. Run RabbitMQ server
 2. Start Zipkin server (optional)
-3. run Spring Clound Configuration Service
+3. run Spring Cloud Configuration Service
 4. run Eureka Discover Service
 5. run Zuul Gateway Service
 6. run other services
